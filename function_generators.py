@@ -188,12 +188,13 @@ class TokeniseInput(BaseEstimator, TransformerMixin):
     return X
 
 class PadSequences(BaseEstimator, TransformerMixin):
-  def __init__(self, column=None):
+  def __init__(self, column=None, maxlen=120):
         self.column = column
+        self.maxlen = maxlen
 
   def fit(self, X, y = None):
     return self
 
   def transform(self, X, y = None):
-    X_train = pad_sequences(X['sequences'],maxlen=120,truncating='post')
+    X_train = pad_sequences(X['sequences'],maxlen=self.maxlen,truncating='post')
     return X_train
