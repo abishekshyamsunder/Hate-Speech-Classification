@@ -88,7 +88,9 @@ def predict_scores(path_to_test, prediction_out):
     sequences = tokeniser.texts_to_sequences(train_sentences)
     padding = pad_sequences(sequences,maxlen=120,truncating='post')
 
-    print(model.predict(testing_padded))
+    output = model.predict(testing_padded)
+    with open(prediction_out, 'w') as outf:
+        outf.write(output)
 
 if __name__ == "__main__":
     predict_scores(sys.argv[1], sys.argv[2])
