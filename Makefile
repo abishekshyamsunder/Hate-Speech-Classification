@@ -8,3 +8,4 @@ run:
 	python -W ignore bi_lstm_model.py
 	python -W ignore gru_model.py
 	python -W ignore bi_gru_model.py
+	python -W ignore conv_model.py
