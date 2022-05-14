@@ -46,3 +46,16 @@ Throughout the training and testing pipeline, 2 versions of each model will exis
 All the preprocessing, training and testing has been neatly organised into pipelines.  
 The different components of the pipelines have been defined in the file `function_generators.py`.  
 These components must be defined in classes containing the fit and transform method so that they can be integrated into the sklearn pipelines smoothly.  
+
+
+## Candidate Models  
+Initially, two simple ML models are trained: Naive Bayes Classifier and a Support Vector Classifier.  These are used to set the baseline performance in terms of accuracy for the classification task.  
+This is done by running the `python -W ignore baseline_model.py` script.  
+It should be noted that the following statistics:  
+1. Model Name    
+2. Accuracy  
+3. Training Time  
+4. Time to classify one instance (named testing time)  
+are all stored for all models (including the baseline models) for analysis later.  
+
+
