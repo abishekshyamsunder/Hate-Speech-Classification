@@ -48,15 +48,16 @@ def predict_scores(path_to_test, prediction_out):
     test_df = pd.read_csv(path_to_test, index_col = "Unnamed: 0")
     
     def create_dense_batch_norm_model(optimizer='adagrad', kernel_initializer='glorot_uniform', dropout=0.2):
-        model = tf.keras.models.Sequential([
-            tf.keras.layers.Embedding(vocab_size,16,input_length=120), # input embedding learnt of length 16
-            tf.keras.layers.Flatten(),
-            tf.keras.layers.Dense(units = 10,activation="relu"),
-            tf.keras.layers.BatchNormalization(),
-            tf.keras.layers.Dense(units = 1, activation="sigmoid")
-        ])
-        model.compile(loss="binary_crossentropy",optimizer="adam",metrics=['accuracy','binary_crossentropy'])
-        model.load_weights("training_1/cp.ckpt")
+        # model = tf.keras.models.Sequential([
+        #     tf.keras.layers.Embedding(vocab_size,16,input_length=120), # input embedding learnt of length 16
+        #     tf.keras.layers.Flatten(),
+        #     tf.keras.layers.Dense(units = 10,activation="relu"),
+        #     tf.keras.layers.BatchNormalization(),
+        #     tf.keras.layers.Dense(units = 1, activation="sigmoid")
+        # ])
+        model = tf.keras.models.load_model("training_1/cp.ckpt")
+        # model.compile(loss="binary_crossentropy",optimizer="adam",metrics=['accuracy','binary_crossentropy'])
+        # model.load_weights("training_1/cp.ckpt")
         return model
 
     model = create_dense_batch_norm_model()
@@ -75,9 +76,7 @@ def predict_scores(path_to_test, prediction_out):
 
     train_sentences = train['Data'].to_numpy()
     train_labels = train['Label'].to_numpy()
-    test_sentences = test_df['Data'].to_numpy()
-    testing_sequences = tokeniser.texts_to_sequences(test_sentences)
-    testing_padded = pad_sequences(testing_sequences,maxlen=120,truncating='post')
+    
 
     vocab_size = 10000
     oov_token = "<oov>"
@@ -87,10 +86,17 @@ def predict_scores(path_to_test, prediction_out):
     word_index = tokeniser.word_index
     sequences = tokeniser.texts_to_sequences(train_sentences)
     padding = pad_sequences(sequences,maxlen=120,truncating='post')
+    
+    test_sentences = test_df['Data'].to_numpy()
+    testing_sequences = tokeniser.texts_to_sequences(test_sentences)
+    testing_padded = pad_sequences(testing_sequences,maxlen=120,truncating='post')
 
     output = model.predict(testing_padded)
+    print(output.shape)
     with open(prediction_out, 'w') as outf:
-        outf.write(output)
+        for item in output:
+            for inner in item:
+                outf.write(str(inner)+"\n")
 
 if __name__ == "__main__":
     predict_scores(sys.argv[1], sys.argv[2])

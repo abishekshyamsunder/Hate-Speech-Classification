@@ -58,7 +58,7 @@ reddit_df = reddit_df.sample(frac = 1)
 vocab_size = 10000
 
 
-cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath="training_1/cp.ckpt",save_weights_only=True,verbose=1)
+cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath="training_1/cp.ckpt",save_weights_only=False, verbose=1)
 
 def create_simple_model(optimizer='adagrad', kernel_initializer='glorot_uniform', dropout=0.2):
   model = tf.keras.models.Sequential([
@@ -143,10 +143,10 @@ for i in range(len(models)):
   f1_sc = f1_score(test_reddit[['Label']], pred_labels, average='macro')
   train_time = end_train - start_train
   test_time = end_test - start_test
-  print(colored("The {name} model gives us an accuracy of: {accuracy} for combined".format(name = names[i], accuracy = accuracy), 'yellow'))
-  print(colored("The {name} model has a training time of: {train_time} for combined".format(name = names[i], train_time = train_time), 'yellow'))
-  print(colored("The {name} model has a testing time of: {test_time} for combined".format(name = names[i], test_time = test_time), 'yellow'))
-  print(colored("The {name} model has a f1_score of: {f1_score} for combined".format(name = names[i], f1_score = f1_sc), 'yellow'))
+  print(colored("The {name} model gives us an accuracy of: {accuracy} for Reddit".format(name = names[i], accuracy = accuracy), 'yellow'))
+  print(colored("The {name} model has a training time of: {train_time} for Reddit".format(name = names[i], train_time = train_time), 'yellow'))
+  print(colored("The {name} model has a testing time of: {test_time} for Reddit".format(name = names[i], test_time = test_time), 'yellow'))
+  print(colored("The {name} model has a f1_score of: {f1_score} for Reddit".format(name = names[i], f1_score = f1_sc), 'yellow'))
 
   with open('stats.csv', 'a', newline='') as csvfile:
       spamwriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
