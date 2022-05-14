@@ -69,9 +69,55 @@ Because these tensorflow models needed to be added to a scikit-learn pipeline, t
 ### Simple Dense  
 This is the simplest NN model used for training with just a 10 unit Dense layer between the embedding layer and the output layer.  
 Upon training, this model provided an accuracy of approximately ~77%, that far surpassed the accuracies obtained by the baseline ML models.  
+The code for training Simple Dense models can be run by `python -W ignore simple_model.py`  
 
 ### Simple RNNs  
 These **Recurrent Neural Networks**, specially designed for dealing with temporal data had a very large training time, but provided accuracies greater than the simple Dense Networks.  
+Again, the code for training the Simple RNN models can be run by `python -W ignore simple_rnn.py`  
+
+### LSTMs and Bi-LSTMs  
+LSTMs or Long Short term memory cells were specifically developed to tackle the problem of RNNs forgetting context. To understand this, something referenced in the current sentence could have been introduced 2 sentences ago and could be important in classifying sentences.  
+Bi-Directional LSTMs are an upgrade over LSTMs capable of parsing the sentence in both the forward the reverse directions.  
+The code for training LSTMs and Bi-LSTMs can be run using the commands  
+- `python -W ignore lstm_model.py`  
+- `python -W ignore bi_lstm_model.py`  
+
+### GRUs and Bi-Directional GRUs  
+Gated Recurrent Units are cells that are very similar to LSTMs in architecture. They contain 2 gates as opposed to 3 in LSTM.  
+GRUs are meant to be more efficient than LSTMs and expected to perform better when there is only limited data while training.  
+The GRU and Bi-Directional GRU models can be trained and tested using the commands  
+- `python -W ignore gru_model.py`  
+- `python -W ignore bi_gru_model.py`  
+
+### Convolutional Layers  
+Even through Convolution layers are primarily used in Image processing tasks, 1D Conv layers were used in the models here (both standalone and stacked) and their performance was evaluated.  
+These models can be trained and tested using the command `python -W ignore conv_model.py`   
+
+### Transfer Learning  
+2 Methods of transfer learning were candidates for this task.  
+#### Transfer Learning with GloVe embeddings  
+The 300 dimension GloVe embeddings trained on the 6B corpus was obtained from the stanfor repository, from which only the embeddings belonging to words in our vocabulary were filtered out and this was used to replace the weights in the embedding layer.   
+A GRU layer was used in this model.  
+This code can be run using the command `python -W ignore glove_model.py`  
+
+
+#### Transfer Learning with Bert   
+
+
+## Batch Training and testing   
+Along with the docker environment, two files named checking_test.py and train_saved.py have been provided that can be used for training a saved model on new data, or generating predictions for new data. These can be run by binding the new data directory to the docker container and calling the appropriate commands  
+```
+docker run -it -p 8888:8888 --mount type=bind,source=<absolute path to data folder>,target=/workdir/data_mount abishekshyamsunder/hate-speech-classifier-image
+cd Hate-Speech-Classification; python3 checking_test.py /workdir/data_mount/clean/new_data.csv /workdir/data_mount/preds.txt
+cd Hate-Speech-Classification; python3 train_saved.py /workdir/data_mount/clean/new_data.csv
+```
+The models can be saved by using a callback, which is provided in the `simple_model.py` file (and can be used in any other training file). 
+The advantage of the above method is that we are binding a folder in our container with a local folder, thus any changes made in the container will be persistent and will be reflected in our local directory as well.  
+
+
+## Analysis  
+A final analysis of the stats is present in the `analysis.ipynb` file (that can be viewed directly from GitHub).  
+It tells us which models have the best accuracy and which ones take less time to train, leaving us with the correct information for choosing a trade-off.  
 
 
 
