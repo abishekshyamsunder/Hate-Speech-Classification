@@ -1,7 +1,7 @@
 # Hate-Speech-Classification
 Hate speech is defined as abusive or threatening speech or writing that expresses prejudice against a particular group, especially on the basis of race, religion, disability, gender identity or sexual orientation, etc.  
 This repository contains code to build different Neural network models for identifying which model provides highest accuracy while classifying sentences based on whether they contain hate speech or not.  
-Primarily, the models will be trained on datasets obtained from different social media platforms.   
+Primarily, the models will be trained on datasets obtained from different social media platforms using tensorflow as the framework.   
 
 ## Prerequisites  
 For running the code in this repository 1 of 2 methods can be used.  
@@ -47,15 +47,31 @@ All the preprocessing, training and testing has been neatly organised into pipel
 The different components of the pipelines have been defined in the file `function_generators.py`.  
 These components must be defined in classes containing the fit and transform method so that they can be integrated into the sklearn pipelines smoothly.  
 
-
 ## Candidate Models  
 Initially, two simple ML models are trained: Naive Bayes Classifier and a Support Vector Classifier.  These are used to set the baseline performance in terms of accuracy for the classification task.  
 This is done by running the `python -W ignore baseline_model.py` script.  
 It should be noted that the following statistics:  
 1. Model Name    
 2. Accuracy  
-3. Training Time  
-4. Time to classify one instance (named testing time)  
+3. F1-Score  
+4. Training Time  
+5. Time to classify one instance (named testing time)  
 are all stored for all models (including the baseline models) for analysis later.  
+
+All the models used are simple 3-4 layered models proving yet again the Neural Networks are really powerful tools that can be used to solve complex problems easily.  
+For each of the models mentioned below, 3 variations are trained  
+1. Model by itself (described in its section, and identified by its name)  
+2. The Model with a dropout layer added  
+3. The Model with a Batch Norm layer added  
+
+Because these tensorflow models needed to be added to a scikit-learn pipeline, there were wrapped as a Keras Classifier object and could directly be added to the pipeline. Though this adds a level of complexity to the model, this helps maintain clean and clear code.  
+
+### Simple Dense  
+This is the simplest NN model used for training with just a 10 unit Dense layer between the embedding layer and the output layer.  
+Upon training, this model provided an accuracy of approximately ~77%, that far surpassed the accuracies obtained by the baseline ML models.  
+
+### Simple RNNs  
+These **Recurrent Neural Networks**, specially designed for dealing with temporal data had a very large training time, but provided accuracies greater than the simple Dense Networks.  
+
 
 
