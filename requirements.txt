@@ -2,3 +2,5 @@ wget
 tensorflow
 pandas
 numpy
+sklearn
+nltk

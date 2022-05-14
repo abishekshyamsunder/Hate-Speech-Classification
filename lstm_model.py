@@ -90,7 +90,7 @@ def create_dense_dropout_model(optimizer='adagrad', kernel_initializer='glorot_u
 
 model1 = KerasClassifier(build_fn=create_simple_model,epochs = 10,verbose=1)
 model2 = KerasClassifier(build_fn=create_dense_dropout_model,epochs = 10,verbose=1)
-model3 = KerasClassifier(build_fn=create_dense_batch_norm_model,epochs = 10,verbose=1,callbacks=[cp_callback])
+model3 = KerasClassifier(build_fn=create_dense_batch_norm_model,epochs = 10,verbose=1)
 
 
 models = [model1, model2, model3]
