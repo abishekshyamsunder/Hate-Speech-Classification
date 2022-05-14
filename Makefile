@@ -9,3 +9,4 @@ run:
 	python -W ignore gru_model.py
 	python -W ignore bi_gru_model.py
 	python -W ignore conv_model.py
+	python -W ignore glove_model.py
