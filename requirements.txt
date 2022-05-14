@@ -1,0 +1,4 @@
+wget
+tensorflow
+pandas
+numpy
