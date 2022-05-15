@@ -120,4 +120,33 @@ A final analysis of the stats is present in the `analysis.ipynb` file (that can 
 It tells us which models have the best accuracy and which ones take less time to train, leaving us with the correct information for choosing a trade-off.  
 
 
+## Results  
+Given below are the results observed post training, during the analysis phase.  
+
+![Combined Time Vs Acc](https://user-images.githubusercontent.com/49049340/168451960-b371ad22-c2f7-4005-b3ee-93ad13952e55.png)
+![Reddit Time Vs Acc](https://user-images.githubusercontent.com/49049340/168451968-72fa5611-4398-4c99-b01f-b56549c3d673.png)
+
+- Max Accuracy in Reddit is Higher than Max Accuracy in the Combined Dataset
+- All Neural Network Models perform much better than simple ML classification models  
+- Highest accuracy with less time is given by Bi-LSTM with Batch Norm  
+- RNNs take too long to train, and give bad performance  
+- Note that in both cases, CONV stacked performs better than one with a single CONV layer as it has a bigger receptive field, and is thus able to handle longer sentences. (77% and 76% acc respectively)
+
+
+<img width="417" alt="Screenshot 2022-05-14 at 3 22 02 PM" src="https://user-images.githubusercontent.com/49049340/168452028-88117d12-1265-4f04-aef6-970be815b475.png">
+<img width="417" alt="Screenshot 2022-05-14 at 3 22 12 PM" src="https://user-images.githubusercontent.com/49049340/168452034-1e629fef-18d2-4ae8-8749-62071db8ef72.png">
+
+- In both cases, transfer learning with GloVe was not beneficial. 16 dimensional embeddings was more than sufficient to work with the data.  
+
+<img width="417" alt="Screenshot 2022-05-14 at 3 17 58 PM" src="https://user-images.githubusercontent.com/49049340/168452039-2f201fce-951f-48e6-b506-08d679692024.png">
+<img width="417" alt="Screenshot 2022-05-14 at 3 19 12 PM" src="https://user-images.githubusercontent.com/49049340/168452041-19de437b-ea69-4e26-b225-ae86a868608f.png">
+
+- Bi-LSTM with Batch norm always seems to outperform all other architectures.  
+
+<img width="431" alt="Screenshot 2022-05-14 at 3 30 21 PM" src="https://user-images.githubusercontent.com/49049340/168452045-cc6e5d4e-dede-4934-8f11-e2bfa09a4e58.png">
+**We know that LSTM with Batch Norm performs the best, but we can also see that the time it takes to process a sentence is almost double that of Simple NN. This might pose as a problem when if need to deploy our model to serve millions of requests per second (as in a real time on the fly hate speech classifier)   **
+
+
+
+
 
