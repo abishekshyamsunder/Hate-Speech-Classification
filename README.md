@@ -2,6 +2,9 @@
 Hate speech is defined as abusive or threatening speech or writing that expresses prejudice against a particular group, especially on the basis of race, religion, disability, gender identity or sexual orientation, etc.  
 This repository contains code to build different Neural network models for identifying which model provides highest accuracy while classifying sentences based on whether they contain hate speech or not.  
 Primarily, the models will be trained on datasets obtained from different social media platforms using tensorflow as the framework.   
+The overall structure of the repo is as given below:  
+<img width="431" alt="Screenshot 2022-05-15 at 1 53 02 PM" src="https://user-images.githubusercontent.com/49049340/168486922-0eb5cef9-2cef-4581-b6c9-d15ea3b8ac03.png">  
+
 
 ## Prerequisites  
 For running the code in this repository 1 of 2 methods can be used.  
@@ -26,6 +29,7 @@ cd Hate-Speech-Classification
 make
 ```
 This will create a container of the docker image, that contains the necessary environment to run the code.  
+We have also provided the docker file that was used to create this image for reference.  
 
 ## Understanding the Makefile    
 **The Makefile is the point of entry** for running the different python scripts in this repository.  
