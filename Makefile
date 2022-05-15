@@ -10,3 +10,4 @@ run:
 	python -W ignore bi_gru_model.py
 	python -W ignore conv_model.py
 	python -W ignore glove_model.py
+	python -W ignore TFBERT_model.py
