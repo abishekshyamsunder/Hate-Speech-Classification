@@ -100,14 +100,15 @@ These models can be trained and tested using the command `python -W ignore conv_
 ### Transfer Learning  
 2 Methods of transfer learning were candidates for this task.  
 #### Transfer Learning with GloVe embeddings  
-The 300 dimension GloVe embeddings trained on the 6B corpus was obtained from the stanfor repository, from which only the embeddings belonging to words in our vocabulary were filtered out and this was used to replace the weights in the embedding layer.   
+The 300 dimension GloVe embeddings trained on the 6B corpus was obtained from the stanford repository, from which only the embeddings belonging to words in our vocabulary were filtered out and this was used to replace the weights in the embedding layer.   
 A GRU layer was used in this model.  
 This code can be run using the command `python -W ignore glove_model.py`  
 
 
 #### Transfer Learning with Bert   
+The TFBERTSequenceClassification model is trained on the combined dataset.
 
-
+This code can be run using the command 'python -W ignore TFBERT_model.py'
 ## Batch Training and testing   
 Along with the docker environment, two files named checking_test.py and train_saved.py have been provided that can be used for training a saved model on new data, or generating predictions for new data. These can be run by binding the new data directory to the docker container and calling the appropriate commands  
 ```
