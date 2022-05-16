@@ -108,7 +108,7 @@ This code can be run using the command `python -W ignore glove_model.py`
 #### Transfer Learning with Bert   
 The TFBERTSequenceClassification model is trained on the combined dataset.
 
-This code can be run using the command 'python -W ignore TFBERT_model.py'
+This code can be run using the command `python -W ignore TFBERT_model.py`
 ## Batch Training and testing   
 Along with the docker environment, two files named checking_test.py and train_saved.py have been provided that can be used for training a saved model on new data, or generating predictions for new data. These can be run by binding the new data directory to the docker container and calling the appropriate commands  
 ```
